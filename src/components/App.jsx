@@ -1,17 +1,18 @@
 import { render } from '@testing-library/react';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import Contacts from './Contacts/Contacts';
 
 const initialState = {
   contacts: [
-    {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ],
   name: '',
   number: '',
-  filter: ''
+  filter: '',
 };
 
 class App extends Component {
@@ -47,12 +48,16 @@ class App extends Component {
 
   getContacts = () => {
     const myContacts = this.state.contacts
-    .filter(contact => contact.name.toLocaleLowerCase().includes(this.state.filter.toLocaleLowerCase()))
-    .map(contact => (
-      <li key={contact.id}>
-        {contact.name} {contact.number}
-      </li>
-    ));
+      .filter(contact =>
+        contact.name
+          .toLocaleLowerCase()
+          .includes(this.state.filter.toLocaleLowerCase())
+      )
+      .map(contact => (
+        <li key={contact.id}>
+          {contact.name} {contact.number}
+        </li>
+      ));
 
     return <>{myContacts}</>;
   };
@@ -61,7 +66,7 @@ class App extends Component {
     const { name, number, filter } = this.state;
     return (
       <>
-        <h2>Phonebook</h2>
+        <h1>Phonebook</h1>
         <form onSubmit={this.handleSubmit}>
           <label>Name</label>
           <input
@@ -90,15 +95,18 @@ class App extends Component {
         <h2>Contacts</h2>
         <label>Find contacts by name</label>
         <input
-            onChange={this.handleChange}
-            type="text"
-            name="filter"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-            value={filter}
-          />
-        <ul>{this.getContacts()}</ul>
+          onChange={this.handleChange}
+          type="text"
+          name="filter"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
+          value={filter}
+        />
+        <Contacts
+          contacts={this.state.contacts}
+          filter={this.state.filter}
+        ></Contacts>
       </>
     );
   }
