@@ -40,7 +40,14 @@ class ContactForm extends Component {
     const { name, number } = this.state;
     return (
       <>
-        <form onSubmit={this.handleSubmit.bind(this, callback)}>
+        <form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            margin: '0 auto',
+          }}
+          onSubmit={this.handleSubmit.bind(this, callback)}
+        >
           <label>Name</label>
           <input
             onChange={this.handleChange}
@@ -61,7 +68,11 @@ class ContactForm extends Component {
             required
             value={number}
           />
-          <button type="submit" name="addContact">
+          <button
+            style={{ width: '140px', margin: '20px auto', padding: '8px' }}
+            type="submit"
+            name="addContact"
+          >
             Add contact
           </button>
         </form>

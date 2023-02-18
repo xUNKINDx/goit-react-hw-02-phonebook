@@ -17,9 +17,26 @@ class Contacts extends Component {
         contact.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
       )
       .map(contact => (
-        <li key={contact.id}>
-          {contact.name} {contact.number}
+        <li
+          style={{
+            listStyle: 'none',
+            display: 'flex',
+            justifyContent: 'space-between',
+            margin: '3px',
+          }}
+          key={contact.id}
+        >
+          <p
+            style={{
+              margin: '0',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            {contact.name} <span>{contact.number}</span>
+          </p>
           <button
+            style={{ margin: '0 0 0 10px' }}
             type="button"
             name="delete"
             data-id={contact.id}
@@ -32,7 +49,17 @@ class Contacts extends Component {
 
     return (
       <>
-        <ul>{myContacts}</ul>
+        <ul
+          style={{
+            display: 'flex',
+            padding: '0',
+            flexDirection: 'column',
+            width: '350px',
+            margin: '10px auto',
+          }}
+        >
+          {myContacts}
+        </ul>
       </>
     );
   }

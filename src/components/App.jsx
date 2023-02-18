@@ -80,9 +80,9 @@ class App extends Component {
     const { filter } = this.state;
     return (
       <>
-        <h1>Phonebook</h1>
+        <h1 style={{ display: 'flex', justifyContent: 'center' }}>Phonebook</h1>
         <ContactForm callback={this.addNewContact} />
-        <h2>Contacts</h2>
+        <h2 style={{ display: 'flex', justifyContent: 'center' }}>Contacts</h2>
         <Filter filter={filter} handleChange={this.handleChange}></Filter>
         <Contacts
           contacts={this.state.contacts}
