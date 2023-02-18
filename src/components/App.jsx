@@ -21,6 +21,7 @@ class App extends Component {
   constructor() {
     super();
     this.addNewContact = this.addNewContact.bind(this);
+    // this.deleteContact = this.deleteContact.bind(this);
   }
 
   handleChange = event => {
@@ -57,6 +58,24 @@ class App extends Component {
     return <>{myContacts}</>;
   };
 
+  deleteContact = id => {
+    const contactToDelete = this.state.contacts.find(
+      contact => contact.id === id
+    );
+
+    if (contactToDelete) {
+      const contactIndex = this.state.contacts.indexOf(contactToDelete);
+
+      if (contactIndex >= 0) {
+        this.setState(prevState => {
+          const currentContacts = [...prevState.contacts];
+          currentContacts.splice(contactIndex, 1);
+          return { contacts: currentContacts };
+        });
+      }
+    }
+  };
+
   render() {
     const { filter } = this.state;
     return (
@@ -68,6 +87,7 @@ class App extends Component {
         <Contacts
           contacts={this.state.contacts}
           filter={this.state.filter}
+          deleteContact={this.deleteContact}
         ></Contacts>
       </>
     );
