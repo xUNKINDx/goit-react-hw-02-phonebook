@@ -19,9 +19,12 @@ class ContactForm extends Component {
     });
   };
 
-  handleSubmit = (callback, event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
+    
+    const { callback } = this.props;
     const { name, number } = this.state;
+
     const newContact = {
       id: nanoid(),
       name: name,
@@ -36,7 +39,6 @@ class ContactForm extends Component {
   };
 
   render() {
-    const { callback } = this.props;
     const { name, number } = this.state;
     return (
       <>
@@ -46,7 +48,7 @@ class ContactForm extends Component {
             flexDirection: 'column',
             margin: '0 auto',
           }}
-          onSubmit={this.handleSubmit.bind(this, callback)}
+          onSubmit={this.handleSubmit}
         >
           <label>Name</label>
           <input

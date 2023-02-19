@@ -18,12 +18,6 @@ class App extends Component {
     ...initialState,
   };
 
-  constructor() {
-    super();
-    this.addNewContact = this.addNewContact.bind(this);
-    // this.deleteContact = this.deleteContact.bind(this);
-  }
-
   handleChange = event => {
     const { name, value } = event.target;
     this.setState(prevState => {
@@ -42,38 +36,11 @@ class App extends Component {
     });
   };
 
-  getContacts = () => {
-    const myContacts = this.state.contacts
-      .filter(contact =>
-        contact.name
-          .toLocaleLowerCase()
-          .includes(this.state.filter.toLocaleLowerCase())
-      )
-      .map(contact => (
-        <li key={contact.id}>
-          {contact.name} {contact.number}
-        </li>
-      ));
-
-    return <>{myContacts}</>;
-  };
-
   deleteContact = id => {
-    const contactToDelete = this.state.contacts.find(
-      contact => contact.id === id
-    );
-
-    if (contactToDelete) {
-      const contactIndex = this.state.contacts.indexOf(contactToDelete);
-
-      if (contactIndex >= 0) {
-        this.setState(prevState => {
-          const currentContacts = [...prevState.contacts];
-          currentContacts.splice(contactIndex, 1);
-          return { contacts: currentContacts };
-        });
-      }
-    }
+    this.setState(prevState => {
+      const currentContacts = prevState.contacts.filter(item => item.id !== id);
+      return { contacts: currentContacts };
+    });
   };
 
   render() {
